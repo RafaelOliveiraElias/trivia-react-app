@@ -41,7 +41,7 @@ class Login extends React.Component {
     return (
       <div>
         <label htmlFor="name">
-          Nome:
+          Nome
           <input
             id="name"
             data-testid="input-player-name"
