@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
+import md5 from 'crypto-js/md5';
 import { fetchToken, saveLogin } from '../redux/actions';
 
 class Login extends React.Component {
@@ -41,11 +42,12 @@ class Login extends React.Component {
     }
   }
 
-  handleClick= () => {
+  handleClick= async () => {
     const { login, getToken } = this.props;
     getToken();
     const { email, name } = this.state;
-    login({ email, name });
+    const emailGenerated = await md5(email).toString();
+    login({ email, name, emailGenerated });
     this.setState({ clicked: true });
   }
 
