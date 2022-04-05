@@ -2,8 +2,11 @@ import { RECEIVE_TOKEN_FAILURE, RECEIVE_TOKEN_SUCCESS, REQUEST_TOKEN } from '../
 
 const INITIAL_STATE = {
   token: '',
-  name: '',
-  email: '',
+  player: { name: '',
+    email: '',
+    score: 0,
+    gravatarEmail: '',
+  },
 };
 
 function token(state = INITIAL_STATE, action) {
@@ -16,8 +19,11 @@ function token(state = INITIAL_STATE, action) {
   case 'LOGIN':
     return {
       ...state,
-      name: action.value.name,
-      email: action.value.email,
+      player: { name: action.value.name,
+        email: action.value.email,
+        gravatarEmail: action.value.emailGenerated,
+        score: 0,
+      },
     };
   case RECEIVE_TOKEN_SUCCESS:
     return {
