@@ -1,6 +1,6 @@
 import {
   RECEIVE_TOKEN_FAILURE, RECEIVE_TOKEN_SUCCESS, REQUEST_TOKEN,
-  RECEIVE_QUESTION_SUCCESS, RECEIVE_QUESTION_FAILURE, REQUEST_QUESTION,
+  RECEIVE_QUESTION_SUCCESS, RECEIVE_QUESTION_FAILURE, REQUEST_QUESTION, ANSWER,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -24,6 +24,10 @@ const INITIAL_STATE = {
     email: '',
     score: 0,
     gravatarEmail: '',
+  },
+  answer: {
+    time: 30,
+    click: false,
   },
   isFetchingQuestion: true,
   isFetching: false,
@@ -67,6 +71,14 @@ function token(state = INITIAL_STATE, action) {
       ...state,
       isFetchingQuestion: false,
       question: action.question,
+    };
+  case ANSWER:
+    return {
+      ...state,
+      answer: {
+        time: action.time,
+        click: true,
+      },
     };
   default:
     return state;

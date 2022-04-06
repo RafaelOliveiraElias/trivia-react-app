@@ -4,10 +4,16 @@ import getQuestion from '../../fetchQuestion';
 export const REQUEST_TOKEN = 'REQUEST_TOKEN';
 export const RECEIVE_TOKEN_SUCCESS = 'RECEIVE_TOKEN_SUCCESS';
 export const RECEIVE_TOKEN_FAILURE = 'RECEIVE_TOKEN_FAILURE';
+export const ANSWER = 'ANSWER';
 export const LOGIN = 'LOGIN';
 
 export const requestToken = () => ({
   type: REQUEST_TOKEN,
+});
+
+export const receiveAnswer = (data) => ({
+  type: ANSWER,
+  time: data,
 });
 
 export const receiveTokensSuccess = (data) => ({
