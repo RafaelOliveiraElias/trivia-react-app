@@ -101,9 +101,6 @@ class Play extends React.Component {
                 <button
                   type="button"
                   key={ index }
-                  id={
-                    element.incorrect
-                  }
                   className={
                     clicked
                       ? element.incorrect
