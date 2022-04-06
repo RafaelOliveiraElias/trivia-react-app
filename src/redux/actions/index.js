@@ -1,4 +1,5 @@
 import getToken from '../../fetchToken';
+import getQuestion from '../../fetchQuestion';
 
 export const REQUEST_TOKEN = 'REQUEST_TOKEN';
 export const RECEIVE_TOKEN_SUCCESS = 'RECEIVE_TOKEN_SUCCESS';
@@ -32,6 +33,36 @@ export function fetchToken() {
       dispatch(receiveTokensSuccess(data));
     } catch (error) {
       dispatch(receiveTokensFailure(error));
+    }
+  };
+}
+
+export const REQUEST_QUESTION = 'REQUEST_QUESTION';
+export const RECEIVE_QUESTION_SUCCESS = 'RECEIVE_QUESTION_SUCCESS';
+export const RECEIVE_QUESTION_FAILURE = 'RECEIVE_QUESTION_FAILURE';
+
+export const requestQuestion = () => ({
+  type: REQUEST_QUESTION,
+});
+
+export const receiveQuestionSuccess = (data) => ({
+  type: RECEIVE_QUESTION_SUCCESS,
+  question: data,
+});
+
+export const receiveQuestionFailure = (error) => ({
+  type: RECEIVE_QUESTION_FAILURE,
+  error,
+});
+
+export function fetchQuestion(token) {
+  return async (dispatch) => {
+    dispatch(requestQuestion());
+    try {
+      const data = await getQuestion(token);
+      dispatch(receiveQuestionSuccess(data));
+    } catch (error) {
+      dispatch(receiveQuestionFailure(error));
     }
   };
 }

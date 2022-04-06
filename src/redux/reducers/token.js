@@ -1,16 +1,41 @@
-import { RECEIVE_TOKEN_FAILURE, RECEIVE_TOKEN_SUCCESS, REQUEST_TOKEN } from '../actions';
+import {
+  RECEIVE_TOKEN_FAILURE, RECEIVE_TOKEN_SUCCESS, REQUEST_TOKEN,
+  RECEIVE_QUESTION_SUCCESS, RECEIVE_QUESTION_FAILURE, REQUEST_QUESTION,
+} from '../actions';
 
 const INITIAL_STATE = {
   token: '',
+  question: {
+    response_code: 0,
+    results: [
+      {
+        category: 'Loading',
+        question: 'loading',
+        correct_answer: 'A crowbar',
+        incorrect_answers: [
+          'A pistol',
+          'The H.E.V suit',
+          'Your fists',
+        ],
+      },
+    ],
+  },
   player: { name: '',
     email: '',
     score: 0,
     gravatarEmail: '',
   },
+  isFetchingQuestion: true,
+  isFetching: false,
 };
 
 function token(state = INITIAL_STATE, action) {
   switch (action.type) {
+  case REQUEST_QUESTION:
+    return {
+      ...state,
+      isFetchingQuestion: true,
+    };
   case REQUEST_TOKEN:
     return {
       ...state,
@@ -31,11 +56,17 @@ function token(state = INITIAL_STATE, action) {
       isFetching: false,
       token: action.token,
     };
-  case RECEIVE_TOKEN_FAILURE:
+  case RECEIVE_TOKEN_FAILURE || RECEIVE_QUESTION_FAILURE:
     return {
       ...state,
       isFetching: false,
       error: action.error,
+    };
+  case RECEIVE_QUESTION_SUCCESS:
+    return {
+      ...state,
+      isFetchingQuestion: false,
+      question: action.question,
     };
   default:
     return state;

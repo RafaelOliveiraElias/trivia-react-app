@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import md5 from 'crypto-js/md5';
-import { fetchToken, saveLogin } from '../redux/actions';
+import { fetchToken, saveLogin, fetchQuestion } from '../redux/actions';
 
 class Login extends React.Component {
   constructor(props) {
@@ -43,11 +43,12 @@ class Login extends React.Component {
   }
 
   handleClick= async () => {
-    const { login, getToken } = this.props;
-    getToken();
+    const { login, getToken, token, dispatchQuestion } = this.props;
+    await getToken();
     const { email, name } = this.state;
     const emailGenerated = await md5(email).toString();
     login({ email, name, emailGenerated });
+    await dispatchQuestion(token);
     this.setState({ clicked: true });
   }
 
@@ -103,6 +104,7 @@ class Login extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   login: (e) => dispatch(saveLogin(e)),
   getToken: () => dispatch(fetchToken()),
+  dispatchQuestion: (token) => dispatch(fetchQuestion(token)),
 });
 
 const mapStateToProps = (state) => ({
