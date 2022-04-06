@@ -2,8 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { saveLogin, fetchQuestion, fetchToken } from '../redux/actions';
+import './Play.css';
+
+const correctAnswer = 'correct-answer';
 
 class Play extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      clicked: false,
+    };
+  }
+
   async componentDidMount() {
     const { dispatchQuestion, token, question, getToken } = this.props;
     await dispatchQuestion(token);
@@ -12,6 +22,16 @@ class Play extends React.Component {
       getToken();
       dispatchQuestion(token);
     }
+  }
+
+  handleClick = () => {
+    this.setState({ clicked: true });
+    console.log('123');
+    /*  if (target.id === correctAnswer) {
+      target.style.border = '3px solid rgb(6, 240, 15)';
+    } else {
+      target.style.border = '3px solid rgb(255, 0, 0)';
+    } */
   }
 
   // Referência: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -30,9 +50,10 @@ class Play extends React.Component {
       .incorrect_answers.map((element, index) => ({
         value: element,
         index,
-        incorrect: true,
+        incorrect: 'wrong-answer',
       }));
-    const result = [{ value: question.results[0].correct_answer }, ...incorrectAnswer];
+    const result = [{ value: question.results[0].correct_answer,
+      incorrect: correctAnswer }, ...incorrectAnswer];
     console.log(result);
     return this.shuffleArray(result);
   }
@@ -40,6 +61,7 @@ class Play extends React.Component {
   render() {
     const { player, question } = this.props;
     const { gravatarEmail, name, score } = player;
+    const { clicked } = this.state;
     return (
       <div>
         <header>
@@ -68,11 +90,20 @@ class Play extends React.Component {
                 <button
                   type="button"
                   key={ index }
-                  data-testid={
+                  id={
                     element.incorrect
-                      ? `wrong-answer-${index}`
-                      : 'correct-answer'
                   }
+                  className={
+                    clicked
+                      ? element.incorrect
+                      : 'normal'
+                  }
+                  data-testid={
+                    element.incorrect === 'wrong-answer'
+                      ? `wrong-answer-${index}`
+                      : correctAnswer
+                  }
+                  onClick={ this.handleClick }
                 >
                   { element.value }
                 </button>
