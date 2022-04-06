@@ -8,6 +8,7 @@ class Play extends React.Component {
     const { dispatchQuestion, token, question, getToken } = this.props;
     await dispatchQuestion(token);
     const number = 3;
+    
     if (question.response_code === number) {
       getToken();
       dispatchQuestion(token);
