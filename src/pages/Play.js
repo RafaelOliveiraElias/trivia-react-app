@@ -11,6 +11,7 @@ class Play extends React.Component {
     super();
     this.state = {
       clicked: false,
+      questioNumber: 0,
     };
   }
 
@@ -44,24 +45,32 @@ class Play extends React.Component {
     return result;
   }
 
-  arraySort = () => {
+  arraySort = (value) => {
     const { question } = this.props;
-    const incorrectAnswer = question.results[0]
+    const incorrectAnswer = question.results[value]
       .incorrect_answers.map((element, index) => ({
         value: element,
         index,
         incorrect: 'wrong-answer',
       }));
-    const result = [{ value: question.results[0].correct_answer,
+    const result = [{ value: question.results[value].correct_answer,
       incorrect: correctAnswer }, ...incorrectAnswer];
     console.log(result);
     return this.shuffleArray(result);
   }
 
+  handleNext = () => {
+    const { questioNumber } = this.state;
+    const num = questioNumber;
+    this.setState = ({
+      questioNumber: num + 1,
+    });
+  }
+
   render() {
     const { player, question } = this.props;
     const { gravatarEmail, name, score } = player;
-    const { clicked } = this.state;
+    const { clicked, questioNumber } = this.state;
     return (
       <div>
         <header>
@@ -74,19 +83,19 @@ class Play extends React.Component {
             data-testid="question-category"
           >
             {
-              question.results[0].category
+              question.results[questioNumber].category
             }
           </p>
           <p
             data-testid="question-text"
           >
             {
-              question.results[0].question
+              question.results[questioNumber].question
             }
           </p>
           <div data-testid="answer-options">
             {
-              this.arraySort().map((element, index) => (
+              this.arraySort(questioNumber).map((element, index) => (
                 <button
                   type="button"
                   key={ index }
@@ -109,6 +118,19 @@ class Play extends React.Component {
                 </button>
               ))
             }
+            {
+              clicked
+                ? (
+                  <button
+                    data-testid="btn-next"
+                    type="button"
+                    onClick={ this.handleNext }
+                  >
+                    Next
+                  </button>)
+                : null
+            }
+
           </div>
         </main>
       </div>
