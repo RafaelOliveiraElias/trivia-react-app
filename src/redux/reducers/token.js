@@ -5,13 +5,27 @@ import {
 
 const INITIAL_STATE = {
   token: '',
-  question: {},
+  question: {
+    response_code: 0,
+    results: [
+      {
+        category: 'Loading',
+        question: 'loading',
+        correct_answer: 'A crowbar',
+        incorrect_answers: [
+          'A pistol',
+          'The H.E.V suit',
+          'Your fists',
+        ],
+      },
+    ],
+  },
   player: { name: '',
     email: '',
     score: 0,
     gravatarEmail: '',
   },
-  isFetchingQuestion: false,
+  isFetchingQuestion: true,
   isFetching: false,
 };
 

@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import { saveLogin, fetchQuestion, fetchToken } from '../redux/actions';
 
 class Play extends React.Component {
-  componentDidMount() {
+  async componentDidMount() {
     const { dispatchQuestion, token, question, getToken } = this.props;
-    dispatchQuestion(token);
+    await dispatchQuestion(token);
     const number = 3;
     if (question.response_code === number) {
       getToken();
@@ -26,11 +26,14 @@ class Play extends React.Component {
 
   arraySort = () => {
     const { question } = this.props;
-    const incorrectAnswer = question.results[0].incorrect_answers.map((element, index) => ({
-      value: element,
-      index,
-    }));
+    const incorrectAnswer = question.results[0]
+      .incorrect_answers.map((element, index) => ({
+        value: element,
+        index,
+        incorrect: true,
+      }));
     const result = [{ value: question.results[0].correct_answer }, ...incorrectAnswer];
+    console.log(result);
     return this.shuffleArray(result);
   }
 
@@ -49,35 +52,31 @@ class Play extends React.Component {
             data-testid="question-category"
           >
             {
-              Object.keys(question).length !== 0
-                ? question.results[0].category : 'Loading...'
+              question.results[0].category
             }
           </p>
           <p
             data-testid="question-text"
           >
             {
-              Object.keys(question).length !== 0
-                ? question.results[0].question : 'Loading...'
+              question.results[0].question
             }
           </p>
           <div data-testid="answer-options">
             {
-              Object.keys(question).length !== 0
-                ? this.arraySort().map((element, index) => (
-                  <button
-                    type="button"
-                    key={ index }
-                    data-testid={
-                      element.index
-                        ? `wrong-answer-${index}`
-                        : 'correct_answer'
-                    }
-                  >
-                    { element.value }
-                  </button>
-                ))
-                : null
+              this.arraySort().map((element, index) => (
+                <button
+                  type="button"
+                  key={ index }
+                  data-testid={
+                    element.incorrect
+                      ? `wrong-answer-${index}`
+                      : 'correct-answer'
+                  }
+                >
+                  { element.value }
+                </button>
+              ))
             }
           </div>
         </main>
