@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { saveLogin, fetchQuestion, fetchToken } from '../redux/actions';
 import './Play.css';
+import Timer from '../components/Timer';
 
 const correctAnswer = 'correct-answer';
 
@@ -78,6 +79,7 @@ class Play extends React.Component {
           <p data-testid="header-player-name">{ name }</p>
           <p data-testid="header-score">{ score }</p>
         </header>
+        <Timer clicked={ clicked } />
         <main>
           <p
             data-testid="question-category"
