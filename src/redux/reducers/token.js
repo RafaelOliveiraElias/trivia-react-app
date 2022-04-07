@@ -1,6 +1,6 @@
 import {
-  ANSWERED, RECEIVE_TOKEN_SUCCESS, REQUEST_TOKEN,
-  RECEIVE_QUESTION_SUCCESS, REQUEST_QUESTION, HANDLETIME, NEXT_QUEST,
+  ANSWERED, HANDLETIME, NEXT_QUEST, RECEIVE_QUESTION_SUCCESS,
+  RECEIVE_TOKEN_SUCCESS, REQUEST_QUESTION, REQUEST_TOKEN, SUM_POINTS,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -25,6 +25,7 @@ const INITIAL_STATE = {
     score: 0,
     gravatarEmail: '',
   },
+  assertions: 0,
   answer: {
     time: 30,
     click: false,
@@ -70,6 +71,11 @@ function token(state = INITIAL_STATE, action) {
         time: 30,
       },
     };
+  case SUM_POINTS:
+    return { ...state,
+      assertions: state.assertions + 1,
+      player: {
+        ...state.player, score: state.player.score + action.points } };
   default:
     return state;
   }

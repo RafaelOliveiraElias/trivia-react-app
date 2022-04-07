@@ -1,5 +1,5 @@
-import getToken from '../../fetchToken';
 import getQuestion from '../../fetchQuestion';
+import getToken from '../../fetchToken';
 
 export const REQUEST_TOKEN = 'REQUEST_TOKEN';
 export const RECEIVE_TOKEN_SUCCESS = 'RECEIVE_TOKEN_SUCCESS';
@@ -8,6 +8,12 @@ export const HANDLETIME = 'HANDLETIME';
 export const LOGIN = 'LOGIN';
 export const ANSWERED = 'ANSWERED';
 export const NEXT_QUEST = 'NEXT_QUEST';
+export const SUM_POINTS = 'SUM_POINTS';
+
+export const sumPoints = (data) => ({
+  type: SUM_POINTS,
+  points: data,
+});
 
 export const requestAnswered = () => ({
   type: ANSWERED,
