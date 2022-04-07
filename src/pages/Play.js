@@ -97,6 +97,7 @@ class Play extends React.Component {
     if (questioNumber === n) {
       history.push('/feedback');
     }
+    this.arraySort(questioNumber + 1);
     this.setState((prevState) => ({
       clicked: false,
       questioNumber: prevState.questioNumber + 1,
