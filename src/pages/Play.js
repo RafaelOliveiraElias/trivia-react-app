@@ -97,7 +97,6 @@ class Play extends React.Component {
     if (questioNumber === n) {
       history.push('/feedback');
     }
-   // this.arraySort(questioNumber + 1);
     this.setState((prevState) => ({
       clicked: false,
       questioNumber: prevState.questioNumber + 1,
@@ -105,6 +104,8 @@ class Play extends React.Component {
     }));
     dispatchNext();
   }
+
+  // this.arraySort(questioNumber + 1);
 
   render() {
     const { player, question, time } = this.props;
