@@ -24,8 +24,8 @@ const INITIAL_STATE = {
     email: '',
     score: 0,
     gravatarEmail: '',
+    assertions: 0,
   },
-  assertions: 0,
   answer: {
     time: 30,
     click: false,
@@ -43,7 +43,8 @@ function token(state = INITIAL_STATE, action) {
   case 'LOGIN':
     return {
       ...state,
-      player: { name: action.value.name,
+      player: { ...state.player,
+        name: action.value.name,
         email: action.value.email,
         gravatarEmail: action.value.emailGenerated,
         score: 0,
@@ -73,9 +74,9 @@ function token(state = INITIAL_STATE, action) {
     };
   case SUM_POINTS:
     return { ...state,
-      assertions: state.assertions + 1,
-      player: {
-        ...state.player, score: state.player.score + action.points } };
+      player: { ...state.player,
+        score: state.player.score + action.points,
+        assertions: state.player.assertions + 1 } };
   default:
     return state;
   }

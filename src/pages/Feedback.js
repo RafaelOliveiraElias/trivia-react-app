@@ -8,22 +8,21 @@ class Feedback extends Component {
   }
 
   saveLocalStorage = () => {
-    const { player: { score } } = this.props;
-    const { assertions } = this.props;
+    const { player: { score, assertions } } = this.props;
     localStorage.setItem('score', score);
     localStorage.setItem('assertions', assertions);
   }
 
   scoreboardResult = () => {
-    const { assertions } = this.props;
+    const { player: { assertions } } = this.props;
     const MIN_SCORE = 3;
     if (assertions < MIN_SCORE) return 'Could be better...';
     return 'Well Done!';
   }
 
   render() {
-    const { player, assertions } = this.props;
-    const { name, score, gravatarEmail } = player;
+    const { player } = this.props;
+    const { name, score, gravatarEmail, assertions } = player;
     console.log(typeof assertions);
     return (
       <>
@@ -45,7 +44,6 @@ class Feedback extends Component {
 
 const mapStateToProps = (state) => ({
   player: state.player,
-  assertions: state.assertions,
 });
 
 Feedback.propTypes = ({
