@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Feedback extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      restarted: false,
+      toRanking: false,
+    };
+  }
+
   componentDidMount() {
     this.saveLocalStorage();
   }
@@ -23,6 +32,7 @@ class Feedback extends Component {
   render() {
     const { player } = this.props;
     const { name, score, gravatarEmail, assertions } = player;
+    const { restarted, toRanking } = this.state;
     console.log(typeof assertions);
     return (
       <>
@@ -36,6 +46,26 @@ class Feedback extends Component {
           <h1 data-testid="feedback-text">{ this.scoreboardResult() }</h1>
           <h2 data-testid="feedback-total-score">{ score }</h2>
           <h2 data-testid="feedback-total-question">{ assertions }</h2>
+          <section>
+            <button
+              type="button"
+              data-testid="btn-play-again"
+              onClick={ () => this.setState({ restarted: true }) }
+            >
+              Play Again
+            </button>
+          </section>
+          { restarted && <Redirect to="/" />}
+          <section>
+            <button
+              type="button"
+              data-testid="btn-ranking"
+              onClick={ () => this.setState({ toRanking: true }) }
+            >
+              Ranking
+            </button>
+          </section>
+          { toRanking && <Redirect to="/ranking" />}
         </main>
       </>
     );
