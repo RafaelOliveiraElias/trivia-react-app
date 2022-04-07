@@ -1,6 +1,6 @@
 import {
-  RECEIVE_TOKEN_FAILURE, RECEIVE_TOKEN_SUCCESS, REQUEST_TOKEN,
-  RECEIVE_QUESTION_SUCCESS, RECEIVE_QUESTION_FAILURE, REQUEST_QUESTION, ANSWER,
+  ANSWERED, RECEIVE_TOKEN_SUCCESS, REQUEST_TOKEN,
+  RECEIVE_QUESTION_SUCCESS, REQUEST_QUESTION, HANDLETIME, NEXT_QUEST,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -36,15 +36,9 @@ const INITIAL_STATE = {
 function token(state = INITIAL_STATE, action) {
   switch (action.type) {
   case REQUEST_QUESTION:
-    return {
-      ...state,
-      isFetchingQuestion: true,
-    };
+    return { ...state, isFetchingQuestion: true };
   case REQUEST_TOKEN:
-    return {
-      ...state,
-      isFetching: true,
-    };
+    return { ...state, isFetching: true };
   case 'LOGIN':
     return {
       ...state,
@@ -55,29 +49,25 @@ function token(state = INITIAL_STATE, action) {
       },
     };
   case RECEIVE_TOKEN_SUCCESS:
-    return {
-      ...state,
-      isFetching: false,
-      token: action.token,
-    };
-  case RECEIVE_TOKEN_FAILURE || RECEIVE_QUESTION_FAILURE:
-    return {
-      ...state,
-      isFetching: false,
-      error: action.error,
-    };
+    return { ...state, isFetching: false, token: action.token };
   case RECEIVE_QUESTION_SUCCESS:
-    return {
-      ...state,
-      isFetchingQuestion: false,
-      question: action.question,
+    return { ...state, isFetchingQuestion: false, question: action.question };
+  case HANDLETIME:
+    return { ...state, answer: { time: action.time },
     };
-  case ANSWER:
+  case ANSWERED:
     return {
       ...state,
       answer: {
-        time: action.time,
         click: true,
+      },
+    };
+  case NEXT_QUEST:
+    return {
+      ...state,
+      answer: {
+        click: false,
+        time: 30,
       },
     };
   default:
