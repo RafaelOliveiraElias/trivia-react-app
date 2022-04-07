@@ -4,15 +4,25 @@ import getQuestion from '../../fetchQuestion';
 export const REQUEST_TOKEN = 'REQUEST_TOKEN';
 export const RECEIVE_TOKEN_SUCCESS = 'RECEIVE_TOKEN_SUCCESS';
 export const RECEIVE_TOKEN_FAILURE = 'RECEIVE_TOKEN_FAILURE';
-export const ANSWER = 'ANSWER';
+export const HANDLETIME = 'HANDLETIME';
 export const LOGIN = 'LOGIN';
+export const ANSWERED = 'ANSWERED';
+export const NEXT_QUEST = 'NEXT_QUEST';
+
+export const requestAnswered = () => ({
+  type: ANSWERED,
+});
+
+export const requestNextQuestion = () => ({
+  type: NEXT_QUEST,
+});
 
 export const requestToken = () => ({
   type: REQUEST_TOKEN,
 });
 
 export const receiveAnswer = (data) => ({
-  type: ANSWER,
+  type: HANDLETIME,
   time: data,
 });
 

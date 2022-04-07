@@ -4,39 +4,35 @@ import PropTypes from 'prop-types';
 import { receiveAnswer } from '../redux/actions';
 
 class Timer extends Component {
-  constructor() {
-    super();
-    this.state = {
-      second: 30,
-    };
-  }
-
   componentDidMount() {
     this.timer();
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   timer = () => {
     const SEC = 1000;
-    const timer = setInterval(() => {
-      const { second } = this.state;
-      const { clicked, dispatchTime } = this.props;
-      this.setState((prevState) => ({
-        second: prevState.second - 1,
-      }));
-      if (second === 1 || clicked) {
-        clearInterval(timer);
-        dispatchTime(second - 1);
+    this.interval = setInterval(() => {
+      const { dispatchTime, timeOverFunc, time } = this.props;
+      dispatchTime(time - 1);
+      if (time <= 1) {
+        clearInterval(this.interval);
+        timeOverFunc();
       }
-      console.log(second);
     }, SEC);
   }
 
   render() {
-    const { second } = this.state;
+    const { time, click } = this.props;
+    if (click) {
+      clearInterval(this.interval);
+    }
     return (
       <div>
         <h1>Timer</h1>
-        <h1>{ second }</h1>
+        <h1>{ time }</h1>
       </div>
     );
   }
@@ -47,7 +43,8 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 const mapStateToProps = (state) => ({
-  player: state.player,
+  click: state.answer.click,
+  time: state.answer.time,
 });
 
 Timer.propTypes = ({
