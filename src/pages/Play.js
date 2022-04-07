@@ -1,11 +1,11 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import Timer from '../components/Timer';
 import {
-  saveLogin, fetchQuestion, fetchToken, requestAnswered, requestNextQuestion,
+  fetchQuestion, fetchToken, requestAnswered, requestNextQuestion, saveLogin, sumPoints,
 } from '../redux/actions';
 import './Play.css';
-import Timer from '../components/Timer';
 
 const correctAnswer = 'correct-answer';
 
@@ -22,14 +22,18 @@ class Play extends React.Component {
 
   async componentDidMount() {
     this.arraySort(0);
-    const { dispatchQuestion, token, question, getToken } = this.props;
+    const { dispatchQuestion, token, getToken } = this.props;
     await dispatchQuestion(token);
     const number = 3;
+    const { question } = this.props;
     if (question.response_code === number) {
       getToken();
       dispatchQuestion(token);
     }
     this.arraySort(0);
+    this.setState({
+      difficulty: question.results[0].difficulty,
+    });
   }
 
   timeOverFunc = () => {
@@ -38,14 +42,27 @@ class Play extends React.Component {
     });
   }
 
-  handleClick = () => {
+  handleClick = (value) => {
     this.setState({ clicked: true });
-    const { answered } = this.props;
-    /*  if (target.id === correctAnswer) {
-      target.style.border = '3px solid rgb(6, 240, 15)';
-    } else {
-      target.style.border = '3px solid rgb(255, 0, 0)';
-    } */
+    const { answered, time, scoreHandle } = this.props;
+    const { difficulty } = this.state;
+    let diffValue = 0;
+    const max = 3;
+    const ten = 10;
+    switch (difficulty) {
+    case 'hard':
+      diffValue = max;
+      break;
+    case 'medium':
+      diffValue = 2;
+      break;
+    default:
+      diffValue = 1;
+    }
+    if (value === correctAnswer) {
+      const points = ten + (time * diffValue);
+      scoreHandle(points);
+    }
     answered();
   }
 
@@ -74,10 +91,16 @@ class Play extends React.Component {
   }
 
   handleNext = () => {
-    const { dispatchNext } = this.props;
+    const { dispatchNext, question, history } = this.props;
+    const { questioNumber } = this.state;
+    const n = 4;
+    if (questioNumber === n) {
+      history.push('/feedback');
+    }
     this.setState((prevState) => ({
       clicked: false,
       questioNumber: prevState.questioNumber + 1,
+      difficulty: question.results[prevState.questioNumber + 1].difficulty,
     }));
     dispatchNext();
   }
@@ -131,7 +154,7 @@ class Play extends React.Component {
                       ? `wrong-answer-${index}`
                       : correctAnswer
                   }
-                  onClick={ this.handleClick }
+                  onClick={ () => this.handleClick(element.incorrect) }
                 >
                   { element.value }
                 </button>
@@ -163,6 +186,7 @@ const mapDispatchToProps = (dispatch) => ({
   getToken: () => dispatch(fetchToken()),
   answered: () => dispatch(requestAnswered()),
   dispatchNext: () => dispatch(requestNextQuestion()),
+  scoreHandle: (score) => dispatch(sumPoints(score)),
 });
 
 const mapStateToProps = (state) => ({

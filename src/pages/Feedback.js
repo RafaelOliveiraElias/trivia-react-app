@@ -3,18 +3,28 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Feedback extends Component {
+  componentDidMount() {
+    this.saveLocalStorage();
+  }
+
+  saveLocalStorage = () => {
+    const { player: { score } } = this.props;
+    const { assertions } = this.props;
+    localStorage.setItem('score', score);
+    localStorage.setItem('assertions', assertions);
+  }
+
   scoreboardResult = () => {
-    const { player } = this.props;
-    const { score } = player;
+    const { assertions } = this.props;
     const MIN_SCORE = 3;
-    if (score < MIN_SCORE) return 'Could be better...';
+    if (assertions < MIN_SCORE) return 'Could be better...';
     return 'Well Done!';
   }
 
   render() {
-    const { player } = this.props;
+    const { player, assertions } = this.props;
     const { name, score, gravatarEmail } = player;
-    console.log(name, score, gravatarEmail);
+    console.log(typeof assertions);
     return (
       <>
         <header>
@@ -25,6 +35,8 @@ class Feedback extends Component {
         </header>
         <main>
           <h1 data-testid="feedback-text">{ this.scoreboardResult() }</h1>
+          <h2 data-testid="feedback-total-score">{ score }</h2>
+          <h2 data-testid="feedback-total-question">{ assertions }</h2>
         </main>
       </>
     );
@@ -33,6 +45,7 @@ class Feedback extends Component {
 
 const mapStateToProps = (state) => ({
   player: state.player,
+  assertions: state.assertions,
 });
 
 Feedback.propTypes = ({
