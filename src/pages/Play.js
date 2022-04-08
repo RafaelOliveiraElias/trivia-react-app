@@ -7,6 +7,8 @@ import {
 } from '../redux/actions';
 import './Play.css';
 
+const he = require('he');
+
 const correctAnswer = 'correct-answer';
 
 class Play extends React.Component {
@@ -139,7 +141,7 @@ class Play extends React.Component {
             data-testid="question-text"
           >
             {
-              question.results[questioNumber].question
+              he.decode(question.results[questioNumber].question)
             }
           </p>
           <div data-testid="answer-options">
@@ -161,7 +163,7 @@ class Play extends React.Component {
                   }
                   onClick={ () => this.handleClick(element.incorrect) }
                 >
-                  { element.value }
+                  { he.decode(element.value) }
                 </button>
               ))
             }
