@@ -95,11 +95,10 @@ class Play extends React.Component {
   handleNext = () => {
     const { dispatchNext, question, history, settings } = this.props;
     const { questioNumber } = this.state;
-    const n = 4;
     if (questioNumber === settings.amount - 1) {
       history.push('/feedback');
     }
-    if (questioNumber !== n) {
+    if (questioNumber !== settings.amount - 1) {
       this.arraySort(questioNumber + 1);
     }
     this.setState((prevState) => ({
