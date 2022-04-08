@@ -1,3 +1,4 @@
+import getCategories from '../../fetchCategories';
 import getQuestion from '../../fetchQuestion';
 import getToken from '../../fetchToken';
 
@@ -9,6 +10,35 @@ export const LOGIN = 'LOGIN';
 export const ANSWERED = 'ANSWERED';
 export const NEXT_QUEST = 'NEXT_QUEST';
 export const SUM_POINTS = 'SUM_POINTS';
+export const REQUEST_CATEGORIES = 'REQUEST_CATEGORIES';
+export const RECEIVE_CATS_SUCCESS = 'RECEIVE_CATS_SUCCESS';
+export const REQUEST_SETTINGS = 'REQUEST_SETTINGS';
+
+export const requestCategories = () => ({
+  type: REQUEST_CATEGORIES,
+});
+
+export const receiveCatsSuccess = (data) => ({
+  type: RECEIVE_CATS_SUCCESS,
+  cats: data,
+});
+
+export const actionSettings = (data) => ({
+  type: REQUEST_SETTINGS,
+  values: data,
+});
+
+export function fetchCategories() {
+  return async (dispatch) => {
+    dispatch(requestCategories());
+    try {
+      const data = await getCategories();
+      dispatch(receiveCatsSuccess(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 export const sumPoints = (data) => ({
   type: SUM_POINTS,
@@ -77,11 +107,11 @@ export const receiveQuestionFailure = (error) => ({
   error,
 });
 
-export function fetchQuestion(token) {
+export function fetchQuestion(token, amount, plus) {
   return async (dispatch) => {
     dispatch(requestQuestion());
     try {
-      const data = await getQuestion(token);
+      const data = await getQuestion(token, amount, plus);
       dispatch(receiveQuestionSuccess(data));
     } catch (error) {
       dispatch(receiveQuestionFailure(error));

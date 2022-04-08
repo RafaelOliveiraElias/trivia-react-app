@@ -22,13 +22,13 @@ class Play extends React.Component {
 
   async componentDidMount() {
     this.arraySort(0);
-    const { dispatchQuestion, token, getToken } = this.props;
-    await dispatchQuestion(token);
+    const { dispatchQuestion, token, getToken, settings } = this.props;
+    await dispatchQuestion(token, settings.amount, settings.link);
     const number = 3;
     const { question } = this.props;
     if (question.response_code === number) {
-      getToken();
-      dispatchQuestion(token);
+      await getToken();
+      await dispatchQuestion(token, settings.amount);
     }
     this.arraySort(0);
     this.setState({
@@ -91,10 +91,10 @@ class Play extends React.Component {
   }
 
   handleNext = () => {
-    const { dispatchNext, question, history } = this.props;
+    const { dispatchNext, question, history, settings } = this.props;
     const { questioNumber } = this.state;
     const n = 4;
-    if (questioNumber === n) {
+    if (questioNumber === settings.amount - 1) {
       history.push('/feedback');
     }
     if (questioNumber !== n) {
@@ -187,7 +187,7 @@ class Play extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   login: (e) => dispatch(saveLogin(e)),
-  dispatchQuestion: (token) => dispatch(fetchQuestion(token)),
+  dispatchQuestion: (token, amount, plus) => dispatch(fetchQuestion(token, amount, plus)),
   getToken: () => dispatch(fetchToken()),
   answered: () => dispatch(requestAnswered()),
   dispatchNext: () => dispatch(requestNextQuestion()),
@@ -200,6 +200,7 @@ const mapStateToProps = (state) => ({
   question: state.question,
   isFetchingQuestion: state.isFetchingQuestion,
   time: state.answer.time,
+  settings: state.settings,
 });
 
 Play.propTypes = ({

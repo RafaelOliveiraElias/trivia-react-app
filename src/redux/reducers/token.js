@@ -1,6 +1,7 @@
 import {
   ANSWERED, HANDLETIME, NEXT_QUEST, RECEIVE_QUESTION_SUCCESS,
   RECEIVE_TOKEN_SUCCESS, REQUEST_QUESTION, REQUEST_TOKEN, SUM_POINTS,
+  REQUEST_CATEGORIES, RECEIVE_CATS_SUCCESS, REQUEST_SETTINGS,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -32,6 +33,11 @@ const INITIAL_STATE = {
   },
   isFetchingQuestion: true,
   isFetching: false,
+  categories: [],
+  settings: {
+    amount: 5,
+    link: '',
+  },
 };
 
 function token(state = INITIAL_STATE, action) {
@@ -41,8 +47,7 @@ function token(state = INITIAL_STATE, action) {
   case REQUEST_TOKEN:
     return { ...state, isFetching: true };
   case 'LOGIN':
-    return {
-      ...state,
+    return { ...state,
       player: { ...state.player,
         name: action.value.name,
         email: action.value.email,
@@ -58,25 +63,20 @@ function token(state = INITIAL_STATE, action) {
     return { ...state, answer: { time: action.time },
     };
   case ANSWERED:
-    return {
-      ...state,
-      answer: {
-        click: true,
-      },
-    };
+    return { ...state, answer: { click: true } };
   case NEXT_QUEST:
-    return {
-      ...state,
-      answer: {
-        click: false,
-        time: 30,
-      },
-    };
+    return { ...state, answer: { click: false, time: 30 } };
   case SUM_POINTS:
     return { ...state,
       player: { ...state.player,
         score: state.player.score + action.points,
         assertions: state.player.assertions + 1 } };
+  case REQUEST_CATEGORIES:
+    return { ...state };
+  case RECEIVE_CATS_SUCCESS:
+    return { ...state, categories: action.cats.trivia_categories };
+  case REQUEST_SETTINGS:
+    return { ...state, settings: action.values };
   default:
     return state;
   }
