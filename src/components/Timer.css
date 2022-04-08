@@ -1,0 +1,119 @@
+.circular {
+  height:100px;
+  width: 100px;
+  position: relative;
+  transform:scale(2);
+}
+
+.circular .inner {
+  position: absolute;
+  z-index: 6;
+  top: 50%;
+  left: 50%;
+  height: 80px;
+  width: 80px;
+  margin: -40px 0 0 -40px;
+  border-radius: 100%;
+  background-image: url('./bgTimer.png');
+  background-size: 125px;
+  background-position: center;
+}
+
+.number {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  z-index:10;
+  font-size:50px;
+  font-weight:500;
+  color:#ffffff;
+  text-shadow: 0 1px 0 black;
+  animation: numbe 30s linear both;
+}
+
+.numberStop {
+  z-index:10;
+  font-size:130px;
+  font-weight:500;
+  color:#ffffff;
+  text-shadow: 0 1px 0 black;
+}
+
+@keyframes numbe {
+  0%{
+    color: #4158d0;
+  }
+  50%{
+    color: #d4ce10;
+  }
+  100%{
+    color: red;
+  }
+}
+
+.circular .bar {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  -webkit-border-radius: 100%;
+  clip: rect(0px, 100px, 100px, 50px);
+}
+
+.circle .bar .progress {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  -webkit-border-radius: 100%;
+  clip: rect(0px, 50px, 100px, 0px);
+  background: #4158d0;
+}
+
+.circle .left .progress {
+  z-index:1;
+  animation: left 30s linear both;
+}
+
+@keyframes left {
+  50%{
+    transform: rotate(180deg);
+    background-color: #d4ce10;
+  }
+
+  100%{
+    background: red;
+    transform: rotate(180deg);
+  }
+}
+
+
+.circle .right {
+  transform: rotate(180deg);
+  z-index:3;
+}
+
+.circle .right .progress {
+  animation: right 15s linear both;
+  animation-delay:15s;
+}
+
+@keyframes right {
+  0%{
+    background: #d4ce10;
+  }
+  100% {
+    transform: rotate(180deg);
+    background: red
+  }
+}
+
+.timerBg {
+  height: 250px;
+  width: 250px;
+  display: flex;
+  background-size: 250px;
+  background-position: center;
+  justify-content: center;
+  align-items: center;
+  background-image: url('./bgTimer.png');
+}

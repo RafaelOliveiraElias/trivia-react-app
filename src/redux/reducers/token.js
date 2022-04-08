@@ -60,10 +60,10 @@ function token(state = INITIAL_STATE, action) {
   case RECEIVE_QUESTION_SUCCESS:
     return { ...state, isFetchingQuestion: false, question: action.question };
   case HANDLETIME:
-    return { ...state, answer: { time: action.time },
+    return { ...state, answer: { time: action.time, click: false },
     };
   case ANSWERED:
-    return { ...state, answer: { click: true } };
+    return { ...state, answer: { ...state.answer, click: true } };
   case NEXT_QUEST:
     return { ...state, answer: { click: false, time: 30 } };
   case SUM_POINTS:

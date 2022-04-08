@@ -88,7 +88,6 @@ class Play extends React.Component {
       }));
     const result = [{ value: question.results[value].correct_answer,
       incorrect: correctAnswer }, ...incorrectAnswer];
-    console.log(result);
     this.setState({ sortedArr: this.shuffleArray(result) });
   }
 
@@ -103,6 +102,7 @@ class Play extends React.Component {
     }
     this.setState((prevState) => ({
       clicked: false,
+      timeIsOver: false,
       questioNumber: prevState.questioNumber + 1,
       difficulty: question.results[prevState.questioNumber + 1].difficulty,
     }));
@@ -124,9 +124,11 @@ class Play extends React.Component {
         </header>
         {clicked || timeIsOver
           ? (
-            <h1>
-              { time }
-            </h1>)
+            <div className="timerBg">
+              <span className="numberStop">
+                { time }
+              </span>
+            </div>)
           : <Timer timeOverFunc={ this.timeOverFunc } clicked={ clicked } />}
         <main>
           <p

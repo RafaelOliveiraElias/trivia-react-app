@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { receiveAnswer } from '../redux/actions';
+import './Timer.css';
 
 class Timer extends Component {
   componentDidMount() {
@@ -30,9 +31,19 @@ class Timer extends Component {
       clearInterval(this.interval);
     }
     return (
-      <div>
-        <h1>Timer</h1>
-        <h1>{ time }</h1>
+      <div className="timerBg">
+        <div className="circular">
+          <div className="inner" />
+          <div className="number">{time}</div>
+          <div className="circle">
+            <div className="bar left">
+              <div className="progress" />
+            </div>
+            <div className="bar right">
+              <div className="progress" />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
