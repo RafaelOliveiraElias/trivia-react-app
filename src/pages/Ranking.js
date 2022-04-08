@@ -7,15 +7,33 @@ class Ranking extends React.Component {
     super(props);
     this.state = {
       redirect: false,
+      ranking: [],
     };
+  }
+
+  componentDidMount() {
+    const ranking = window.localStorage.getItem('ranking');
+    const rankingValues = JSON.parse(ranking);
+    const sortedPlayers = rankingValues.sort((a, b) => b.score - a.score);
+    this.setState({ ranking: sortedPlayers });
   }
 
   render() {
     console.log(this.props);
-    const { redirect } = this.state;
+    const { redirect, ranking } = this.state;
     return (
       <>
         <h1 data-testid="ranking-title">Ranking</h1>
+        <section>
+          {ranking.map((each, index) => (
+            <div key={ index }>
+              <h3>{`${index + 1}.`}</h3>
+              <img src={ `https://www.gravatar.com/avatar/${each.picture}` } alt={ each.name } />
+              <h3 data-testid={ `player-name-${index}` }>{each.name}</h3>
+              <h3 data-testid={ `player-score-${index}` }>{each.score}</h3>
+            </div>
+          ))}
+        </section>
         <section>
           <button
             type="button"

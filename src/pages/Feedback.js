@@ -17,9 +17,17 @@ class Feedback extends Component {
   }
 
   saveLocalStorage = () => {
-    const { player: { score, assertions } } = this.props;
+    const { player: { score, assertions, name, gravatarEmail } } = this.props;
     localStorage.setItem('score', score);
     localStorage.setItem('assertions', assertions);
+
+    const ranking = localStorage.getItem('ranking');
+    const arr = '[]';
+    const playersJSON = ranking || arr;
+    const players = JSON.parse(playersJSON);
+    const latestPlayer = { name, score, picture: gravatarEmail };
+    players.push(latestPlayer);
+    localStorage.setItem('ranking', JSON.stringify(players));
   }
 
   scoreboardResult = () => {
