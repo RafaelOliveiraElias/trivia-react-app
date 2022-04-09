@@ -88,7 +88,6 @@ class Play extends React.Component {
       }));
     const result = [{ value: question.results[value].correct_answer,
       incorrect: correctAnswer }, ...incorrectAnswer];
-    console.log(result);
     this.setState({ sortedArr: this.shuffleArray(result) });
   }
 
@@ -103,6 +102,7 @@ class Play extends React.Component {
     }
     this.setState((prevState) => ({
       clicked: false,
+      timeIsOver: false,
       questioNumber: prevState.questioNumber + 1,
       difficulty: question.results[prevState.questioNumber + 1].difficulty,
     }));
@@ -133,6 +133,7 @@ class Play extends React.Component {
             : <Timer timeOverFunc={ this.timeOverFunc } clicked={ clicked } />}
         </section>
         <main className="box-play-game">
+
           <div className="box-question">
             <p
               data-testid="question-category"
@@ -150,6 +151,30 @@ class Play extends React.Component {
             </p>
           </div>
           <div data-testid="answer-options" className="box-answers">
+            {clicked || timeIsOver
+              ? (
+                <div className="timerBg">
+                  <span className="numberStop">
+                    { time }
+                  </span>
+                </div>)
+              : <Timer timeOverFunc={ this.timeOverFunc } clicked={ clicked } />}
+            <p
+              data-testid="question-category"
+            >
+              {
+                question.results[questioNumber].category
+              }
+            </p>
+            <p
+              data-testid="question-text"
+            >
+              {
+                he.decode(question.results[questioNumber].question)
+              }
+            </p>
+          </div>
+          <div data-testid="answer-options">
             {
               sortedArr.map((element, index) => (
                 <button
