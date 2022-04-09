@@ -5,7 +5,7 @@ import Timer from '../components/Timer';
 import {
   fetchQuestion, fetchToken, requestAnswered, requestNextQuestion, saveLogin, sumPoints,
 } from '../redux/actions';
-import './Play.css';
+import '../css/Play.css';
 
 const he = require('he');
 
@@ -116,34 +116,40 @@ class Play extends React.Component {
     const { gravatarEmail, name, score } = player;
     const { clicked, questioNumber, timeIsOver, sortedArr } = this.state;
     return (
-      <div>
+      <div className="box-play">
         <header>
-          <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${gravatarEmail}` } alt="headerprofile" />
-          <p data-testid="header-player-name">{ name }</p>
-          <p data-testid="header-score">{ score }</p>
+          <div className="box-header">
+            <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${gravatarEmail}` } alt="headerprofile" />
+            <h3 data-testid="header-player-name">{ `Jogador: ${name}` }</h3>
+            <h3 data-testid="header-score">{ `Score: ${score}` }</h3>
+          </div>
         </header>
-        {clicked || timeIsOver
-          ? (
-            <h1>
-              { time }
-            </h1>)
-          : <Timer timeOverFunc={ this.timeOverFunc } clicked={ clicked } />}
-        <main>
-          <p
-            data-testid="question-category"
-          >
-            {
-              question.results[questioNumber].category
-            }
-          </p>
-          <p
-            data-testid="question-text"
-          >
-            {
-              he.decode(question.results[questioNumber].question)
-            }
-          </p>
-          <div data-testid="answer-options">
+        <section className="box-timer">
+          {clicked || timeIsOver
+            ? (
+              <h1>
+                { time }
+              </h1>)
+            : <Timer timeOverFunc={ this.timeOverFunc } clicked={ clicked } />}
+        </section>
+        <main className="box-play-game">
+          <div className="box-question">
+            <p
+              data-testid="question-category"
+            >
+              {
+                question.results[questioNumber].category
+              }
+            </p>
+            <p
+              data-testid="question-text"
+            >
+              {
+                he.decode(question.results[questioNumber].question)
+              }
+            </p>
+          </div>
+          <div data-testid="answer-options" className="box-answers">
             {
               sortedArr.map((element, index) => (
                 <button
@@ -172,13 +178,13 @@ class Play extends React.Component {
                   <button
                     data-testid="btn-next"
                     type="button"
+                    className="btn-next"
                     onClick={ this.handleNext }
                   >
                     Next
                   </button>)
                 : null
             }
-
           </div>
         </main>
       </div>

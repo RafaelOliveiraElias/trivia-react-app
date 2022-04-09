@@ -1,0 +1,111 @@
+body {
+  background: rgb(52, 0, 95);
+  margin: 0;
+}
+
+.trivia-body {
+  align-items: center;
+  background-color: rgb(70, 54, 103);
+  box-sizing: border-box;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin: auto;
+  padding: 0;
+  position: relative;
+  width: 1300px;
+}
+
+.trivia-body:before {
+  background-image: linear-gradient(rgb(209, 202, 230), rgb(52, 0, 95));
+  border-radius: 50%;
+  content: '';
+  height: 400px;
+  position: absolute;
+  transform: translate(-300px, -120px);
+  width: 400px;
+}
+
+.trivia-body:after {
+  background-image: linear-gradient(rgb(25, 254, 2), rgb(52, 0, 95));
+  border-radius: 50%;
+  content: '';
+  height: 350px;
+  position: absolute;
+  transform: translate(350px, 150px);
+  width: 350px;
+}
+
+.box-access {
+  backdrop-filter: blur(25px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  display: flex;
+  padding: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.box-login, .box-logo {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: center;
+  padding: 20px;
+  width: 400px;
+}
+
+.box-logo img {
+  width: 100%;
+}
+
+.input-text {
+  border: none;
+  border-radius: 5px;
+  color: rgb(70 54 103);
+  margin-left: 10px;
+  margin-top: 30px;
+  outline: none;
+  padding: 10px;
+  width: 250px;
+}
+
+.lbl-login {
+  color: rgb(70 54 103);
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.btn-login {
+  background: rgb(70 54 103);
+  border: none;
+  border-radius: 5px;
+  color: rgb(209, 202, 230);
+  font-size: 1.25rem;
+  margin-top: 20px;
+  padding: 10px;
+  width: 250px;
+}
+
+.btn-login:hover {
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.55);
+  font-weight: 900;
+}
+
+.btn-login:active {
+  filter: brightness(0.5);
+}
+
+.btn-login:disabled {
+  background-color: rgb(209, 202, 230);
+  border: solid 1px rgb(70, 54, 103);
+  box-shadow: none;
+  color: rgb(70, 54, 103);
+  cursor: none;
+  font-weight: 100;
+}

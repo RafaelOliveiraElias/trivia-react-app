@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import md5 from 'crypto-js/md5';
 import { fetchToken, saveLogin, fetchQuestion, fetchCategories } from '../redux/actions';
+import '../css/Login.css';
+import LogoTrivia from '../images/quem-quer-ser-um-milionario.png';
 
 class Login extends React.Component {
   constructor(props) {
@@ -61,48 +63,59 @@ class Login extends React.Component {
   render() {
     const { isInvalid, clicked, name, email } = this.state;
     return (
-      <div>
-        <label htmlFor="name">
-          Nome
-          <input
-            id="name"
-            data-testid="input-player-name"
-            type="text"
-            name="name"
-            onChange={ this.onInputChange }
-            value={ name }
-          />
-        </label>
-        <label htmlFor="email">
-          Email:
-          <input
-            id="email"
-            data-testid="input-gravatar-email"
-            type="email"
-            name="email"
-            onChange={ this.onInputChange }
-            value={ email }
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="btn-play"
-          disabled={ isInvalid }
-          onClick={ this.handleClick }
-        >
-          Play
-        </button>
-        {clicked && <Redirect to="/play" />}
+      <main className="trivia-body">
+        <div className="box-access">
+          <div className="box-login">
+            <label htmlFor="name" className="lbl-login">
+              Nome
+              <input
+                id="name"
+                data-testid="input-player-name"
+                type="text"
+                name="name"
+                onChange={ this.onInputChange }
+                value={ name }
+                className="input-text"
+              />
+            </label>
+            <label htmlFor="email" className="lbl-login">
+              Email:
+              <input
+                id="email"
+                data-testid="input-gravatar-email"
+                type="email"
+                name="email"
+                onChange={ this.onInputChange }
+                value={ email }
+                className="input-text"
+              />
+            </label>
+            <button
+              type="button"
+              data-testid="btn-play"
+              disabled={ isInvalid }
+              onClick={ this.handleClick }
+              className="btn-login"
+            >
+              Play
+            </button>
+            {clicked && <Redirect to="/play" />}
 
-        <Link to="/settings">
-          <button
-            type="button"
-            data-testid="btn-settings"
-          >
-            Settings
-          </button>
-        </Link>
-      </div>
+            <Link to="/settings">
+              <button
+                type="button"
+                data-testid="btn-settings"
+                className="btn-login"
+              >
+                Settings
+              </button>
+            </Link>
+          </div>
+          <div className="box-logo">
+            <img src={ LogoTrivia } alt="logo jogo trivia" />
+          </div>
+        </div>
+      </main>
     );
   }
 }
