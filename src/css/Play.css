@@ -144,8 +144,9 @@ header {
   z-index: 10;
 }
 
-.box-answers button {
+.normal, .btn-next {
   background: rgb(70 54 103);
+  border: none;
   border-radius: 10px;
   color: rgb(209, 202, 230);
   font-size: 1rem;
@@ -155,21 +156,40 @@ header {
   width: 400px;
 }
 
-.wrong-answer {
-  border: 3px solid red;
-}
-
-.correct-answer {
-  border: 3px solid rgb(6, 240, 15);
-}
-
-.box-answers button:hover {
+.normal:hover, .btn-next:hover {
+  background: rgb(52, 0, 95);
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.55);
   font-weight: 900;
 }
 
-.box-answers button:active {
+.normal:active, .btn-next:active {
   filter: brightness(0.5);
+}
+
+.wrong-answer {
+  background: rgb(70 54 103);
+  border: 3px solid red;
+  border-radius: 10px;
+  color: rgb(209, 202, 230);
+  font-size: 1rem;
+  height: 50px;
+  margin: 5px;
+  padding: 10px 5px;
+  width: 400px;
+}
+
+.correct-answer {
+  background: rgb(52, 0, 95);;
+  border: 3px solid rgb(6, 240, 15);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.55);
+  color: rgb(209, 202, 230);
+  font-size: 1.25rem;
+  font-weight: 900;
+  height: 50px;
+  margin: 5px;
+  padding: 10px 5px;
+  width: 400px;
 }
 
 .btn-next:disabled {

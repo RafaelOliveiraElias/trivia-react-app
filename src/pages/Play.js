@@ -121,8 +121,8 @@ class Play extends React.Component {
         <header>
           <div className="box-header">
             <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${gravatarEmail}` } alt="headerprofile" />
-            <h3 data-testid="header-player-name">{ `Jogador: ${name}` }</h3>
-            <h3 data-testid="header-score">{ `Score: ${score}` }</h3>
+            <h2 data-testid="header-player-name">{ `Player: ${name}` }</h2>
+            <h2 data-testid="header-score">{ `Score: ${score}` }</h2>
           </div>
         </header>
         <section className="box-timer">
