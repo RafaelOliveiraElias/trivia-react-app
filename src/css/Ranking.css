@@ -1,4 +1,4 @@
-header {
+.header-ranking {
   align-items: top;
   background-color: rgb(70, 54, 103);
   box-sizing: border-box;
@@ -13,7 +13,7 @@ header {
 
 .box-header-ranking {
   align-items: center;
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -84,7 +84,7 @@ header {
 
 .box-list-ranking {
   align-items: center;
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -138,7 +138,7 @@ header {
 
 .box-button-ranking {
   align-items: top;
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -165,7 +165,7 @@ header {
   font-size: 1rem;
   height: 40px;
   padding: 10px 5px;
-  width: 250px;
+  width: 270px;
 }
 
 .box-button-ranking button:hover {

@@ -1,0 +1,102 @@
+.main-settings {
+  align-items: center;
+  background-color: rgb(70, 54, 103);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin: auto;
+  width: 1300px;
+}
+
+.main-settings:before {
+  background-image: url('../images/quem-quer-ser-um-milionario.png');
+  background-size: contain;
+  border-radius: 50%;
+  content: '';
+  height: 400px;
+  position: absolute;
+  transform: translate(-420px, -200px);
+  width: 400px;
+}
+
+.main-settings:after {
+  background-image: url('../images/quem-quer-ser-um-milionario.png');
+  background-size: contain;
+  border-radius: 50%;
+  content: '';
+  height: 600px;
+  position: absolute;
+  transform: translate(330px, 100px);
+  width: 600px;
+}
+
+.box-settings {
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+  color: rgb(209, 202, 230);
+  display: flex;
+  flex-direction: column;
+  font-weight: 900;
+  height: 650px;
+  justify-content: space-around;
+  padding: 20px;
+  position: relative;
+  width: 800px;
+  z-index: 16;
+}
+
+.box-settings img {
+  width: 75%;
+}
+
+.box-settings label {
+  width: 400px;
+}
+
+.box-settings input, .box-settings select {
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+  outline: none;
+  padding: 10px;
+  width: 400px;
+}
+
+.box-settings select {
+  background: rgb(70 54 103);
+  color: rgb(209, 202, 230);
+  font-size: 1rem;
+}
+
+.box-settings select:hover {
+  background: rgb(52, 0, 95);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.55);
+  font-weight: 900;
+}
+
+.box-settings button {
+  background: rgb(70 54 103);
+  border: none;
+  border-radius: 10px;
+  color: rgb(209, 202, 230);
+  font-size: 1rem;
+  height: 50px;
+  padding: 10px 5px;
+  width: 400px;
+}
+
+.box-settings button:hover {
+  background: rgb(52, 0, 95);
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.55);
+  font-weight: 900;
+}
+
+.box-settings button:active {
+  filter: brightness(0.5);
+}

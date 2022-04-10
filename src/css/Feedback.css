@@ -3,7 +3,7 @@ main {
   background-color: rgb(70, 54, 103);
   display: flex;
   flex-direction: column;
-  height: 82vh;
+  height: 90vh;
   justify-content: center;
   margin: auto;
   width: 1300px;
@@ -11,7 +11,7 @@ main {
 
 .box-score-feedback {
   align-items: center;
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -22,7 +22,7 @@ main {
   display: flex;
   flex-direction: column;
   font-weight: 900;
-  height: 600px;
+  height: 550px;
   justify-content: space-around;
   padding: 20px;
   position: relative;
@@ -44,7 +44,7 @@ main {
   margin: 0;
 }
 
-header {
+.header-feedback {
   align-items: top;
   background-color: rgb(70, 54, 103);
   box-sizing: border-box;
@@ -52,13 +52,12 @@ header {
   height: 100px;
   justify-content: center;
   margin: auto;
-  padding: 0;
   width: 1300px;
 }
 
 .box-header {
   align-items: center;
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -81,7 +80,7 @@ header {
   box-sizing: border-box;
   color: rgb(209, 202, 230);
   display: flex;
-  height: 60vh;
+  height: 680px;
   justify-content: center;
   margin-bottom: 20px;
   position: relative;

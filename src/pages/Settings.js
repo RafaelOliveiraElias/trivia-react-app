@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { actionSettings } from '../redux/actions';
+import '../css/Settings.css';
+import WhoWant from '../images/who-want-to-be-a-millionaire.png';
 
 class Settings extends React.Component {
   constructor(props) {
@@ -47,11 +49,13 @@ class Settings extends React.Component {
     const { categories } = this.props;
     const { amount, redirect } = this.state;
     return (
-      <div>
-        <h1 data-testid="settings-title">
-          Settings
-        </h1>
-        <div>
+      <main className="main-settings">
+        <div className="box-settings">
+          <img src={ WhoWant } alt="logo do jogo" />
+          <h1 data-testid="settings-title">
+            Settings
+          </h1>
+          </div>
           <label htmlFor="amount">
             Number of Questions:
             <input
@@ -100,16 +104,16 @@ class Settings extends React.Component {
           >
             Save Seetings
           </button>
+          <button
+            type="button"
+            data-testid="btn-go-home"
+            onClick={ () => this.setState({ redirect: true }) }
+          >
+            Play Again
+          </button>
+          { redirect && <Redirect to="/" />}
         </div>
-        <button
-          type="button"
-          data-testid="btn-go-home"
-          onClick={ () => this.setState({ redirect: true }) }
-        >
-          Play Again
-        </button>
-        { redirect && <Redirect to="/" />}
-      </div>
+      </main>
     );
   }
 }

@@ -12,7 +12,7 @@ header {
 
 .box-header {
   align-items: center;
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -97,7 +97,7 @@ header {
 
 .box-question {
   align-items: center;
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -126,7 +126,7 @@ header {
 
 .box-answers {
   align-items: center;
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -180,7 +180,7 @@ header {
 }
 
 .correct-answer {
-  background: rgb(52, 0, 95);;
+  background: rgb(52, 0, 95);
   border: 3px solid rgb(6, 240, 15);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.55);

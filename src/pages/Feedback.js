@@ -46,7 +46,7 @@ class Feedback extends Component {
     console.log(typeof assertions);
     return (
       <>
-        <header>
+        <header className="header-feedback">
           <div className="box-header">
             <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${gravatarEmail}` } alt="headerprofile" />
             <h2 data-testid="header-player-name">{ `Player: ${name}` }</h2>

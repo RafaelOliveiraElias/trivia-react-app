@@ -26,7 +26,7 @@ class Ranking extends React.Component {
     const { redirect, ranking } = this.state;
     return (
       <>
-        <header>
+        <header className="header-ranking">
           <div className="box-header-ranking">
             <div>
               <img
