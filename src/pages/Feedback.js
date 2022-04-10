@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import '../css/Feedback.css';
+import WhoWant from '../images/who-want-to-be-a-millionaire.png';
 
 class Feedback extends Component {
   constructor(props) {
@@ -33,8 +35,8 @@ class Feedback extends Component {
   scoreboardResult = () => {
     const { player: { assertions } } = this.props;
     const MIN_SCORE = 3;
-    if (assertions < MIN_SCORE) return 'Could be better...';
-    return 'Well Done!';
+    if (assertions < MIN_SCORE) return (<>Could be better...&#128577;</>);
+    return (<>Well Done!&#128515;</>);
   }
 
   render() {
@@ -45,35 +47,41 @@ class Feedback extends Component {
     return (
       <>
         <header>
-          <h1>Feedback</h1>
-          <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${gravatarEmail}` } alt="headerprofile" />
-          <h3 data-testid="header-player-name">{ name }</h3>
-          <h3 data-testid="header-score">{ score }</h3>
+          <div className="box-header">
+            <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${gravatarEmail}` } alt="headerprofile" />
+            <h2 data-testid="header-player-name">{ `Player: ${name}` }</h2>
+            <h2 data-testid="header-score">{ `Score: ${score}` }</h2>
+          </div>
         </header>
         <main>
-          <h1 data-testid="feedback-text">{ this.scoreboardResult() }</h1>
-          <h2 data-testid="feedback-total-score">{ score }</h2>
-          <h2 data-testid="feedback-total-question">{ assertions }</h2>
-          <section>
-            <button
-              type="button"
-              data-testid="btn-play-again"
-              onClick={ () => this.setState({ restarted: true }) }
-            >
-              Play Again
-            </button>
-          </section>
-          { restarted && <Redirect to="/" />}
-          <section>
-            <button
-              type="button"
-              data-testid="btn-ranking"
-              onClick={ () => this.setState({ toRanking: true }) }
-            >
-              Ranking
-            </button>
-          </section>
-          { toRanking && <Redirect to="/ranking" />}
+          <div className="box-feedback">
+            <div className="box-score-feedback">
+              <img src={ WhoWant } alt="logo do jogo" />
+              <h1 data-testid="feedback-text">{ this.scoreboardResult() }</h1>
+              <h2 data-testid="feedback-total-score">{ `Score Total: ${score}` }</h2>
+              <h2
+                data-testid="feedback-total-question"
+              >
+                { `Assertions: ${assertions}` }
+              </h2>
+              <button
+                type="button"
+                data-testid="btn-play-again"
+                onClick={ () => this.setState({ restarted: true }) }
+              >
+                Play Again
+              </button>
+              { restarted && <Redirect to="/" />}
+              <button
+                type="button"
+                data-testid="btn-ranking"
+                onClick={ () => this.setState({ toRanking: true }) }
+              >
+                Ranking
+              </button>
+              { toRanking && <Redirect to="/ranking" />}
+            </div>
+          </div>
         </main>
       </>
     );
