@@ -16,7 +16,7 @@ header {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 0 0 15px 15px;
+  border-radius: 0 0 10px 10px;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
   color: rgb(209, 202, 230);
@@ -101,7 +101,7 @@ header {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
+  border-radius: 10px;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
   color: rgb(209, 202, 230);
@@ -130,7 +130,7 @@ header {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
+  border-radius: 10px;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
   color: rgb(209, 202, 230);
@@ -148,7 +148,7 @@ header {
 .normal, .btn-next {
   background: rgb(70 54 103);
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   color: rgb(209, 202, 230);
   font-size: 1rem;
   height: 50px;
@@ -170,7 +170,7 @@ header {
 .wrong-answer {
   background: rgb(70 54 103);
   border: 3px solid red;
-  border-radius: 10px;
+  border-radius: 5px;
   color: rgb(209, 202, 230);
   font-size: 1rem;
   height: 50px;
@@ -182,7 +182,7 @@ header {
 .correct-answer {
   background: rgb(52, 0, 95);
   border: 3px solid rgb(6, 240, 15);
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.55);
   color: rgb(209, 202, 230);
   font-size: 1.25rem;

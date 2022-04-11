@@ -132,7 +132,7 @@ class Settings extends React.Component {
         </div>
         <table className="box-table">
           <thead>
-            <tr>
+            <tr className="table-header">
               <th>Category</th>
               <th>Difficulty</th>
               <th>Type</th>
@@ -142,7 +142,7 @@ class Settings extends React.Component {
           </thead>
           <tbody>
             {allSettings.map((each, index) => (
-              <tr id={ index } key={ index }>
+              <tr id={ index } key={ index } className="table-body">
                 <td>
                   { each.category
                     ? categories
@@ -152,8 +152,9 @@ class Settings extends React.Component {
                 <td>{each.difficulty ? each.difficulty : 'Any Difficulty'}</td>
                 <td>{each.type ? each.type : 'Any Type'}</td>
                 <td>{each.amount}</td>
-                <td>
+                <td className="tab-btn-del">
                   <button
+                    className="btn-tab-del"
                     type="button"
                     onClick={ () => this.handleDelete(index) }
                   >
