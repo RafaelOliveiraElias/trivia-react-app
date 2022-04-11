@@ -157,13 +157,25 @@ header {
   width: 400px;
 }
 
-.normal:hover, .btn-next:hover {
+.btn-music {
+  background: rgb(70 54 103);
+  border: none;
+  border-radius: 5px;
+  color: rgb(209, 202, 230);
+  font-size: 1rem;
+  height: 40px;
+  margin: 5px;
+  padding: 5px;
+  width: 100px;
+}
+
+.normal:hover, .btn-next:hover, .btn-music:hover {
   background: rgb(52, 0, 95);
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.55);
   font-weight: 900;
 }
 
-.normal:active, .btn-next:active {
+.normal:active, .btn-next:active, .btn-music:hover {
   filter: brightness(0.5);
 }
 

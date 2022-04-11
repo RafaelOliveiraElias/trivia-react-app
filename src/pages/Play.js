@@ -140,11 +140,11 @@ class Play extends React.Component {
             <h2 data-testid="header-player-name">{ `Player: ${name}` }</h2>
             <h2 data-testid="header-score">{ `Score: ${score}` }</h2>
             <button
+              className="btn-music"
               type="button"
               onClick={ this.togglePlay }
             >
-              {this.state.play ? 'Pause' : 'Play'}
-
+              { this.play ? 'Pause' : 'Play' }
             </button>
           </div>
         </header>
