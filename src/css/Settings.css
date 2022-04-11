@@ -1,7 +1,8 @@
 .main-settings {
-  align-items: center;
+  align-items: flex-start;
   background-color: rgb(70, 54, 103);
   display: flex;
+  flex-direction: row;
   height: 100vh;
   justify-content: center;
   margin: auto;
@@ -15,7 +16,7 @@
   content: '';
   height: 400px;
   position: absolute;
-  transform: translate(-420px, -200px);
+  transform: translate(-430px, 40px);
   width: 400px;
 }
 
@@ -26,7 +27,7 @@
   content: '';
   height: 600px;
   position: absolute;
-  transform: translate(330px, 100px);
+  transform: translate(330px, 180px);
   width: 600px;
 }
 
@@ -44,9 +45,11 @@
   flex-direction: column;
   font-weight: 900;
   justify-content: space-around;
+  margin: 10px;
+  margin-top: 120px;
   padding: 20px;
   position: relative;
-  width: 800px;
+  width: 550px;
   z-index: 16;
 }
 
@@ -117,21 +120,24 @@
   font-weight: 900;
   justify-content: space-around;
   margin: 10px;
+  margin-top: 120px;
   padding: 15px;
   position: relative;
-  width: 750px;
+  width: 600px;
   z-index: 16;
 }
 
 .box-table th {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(52, 0, 95, 1);
+  border-radius: 5px;
   height: 40px;
-  width: 145px;
+  width: 120px;
 }
 
 .box-table td {
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(52, 0, 95, 0.6);
+  border-radius: 5px;
   font-weight: 100;
   height: 30px;
-  width: 145px;
+  width: 120px;
 }
