@@ -77,7 +77,12 @@ class Settings extends React.Component {
           </label>
           <label htmlFor="category">
             Category:
-            <select id="category" name="category" onChange={ this.onInputChange } value={ category }>
+            <select
+              id="category"
+              name="category"
+              onChange={ this.onInputChange }
+              value={ category }
+            >
               {categories.map((each) => (
                 <option
                   value={ each.id }
@@ -90,7 +95,12 @@ class Settings extends React.Component {
           </label>
           <label htmlFor="difficulty">
             Difficulty:
-            <select id="difficulty" name="difficulty" onChange={ this.onInputChange } value={ difficulty }>
+            <select
+              id="difficulty"
+              name="difficulty"
+              onChange={ this.onInputChange }
+              value={ difficulty }
+            >
               <option value="">Any difficulty</option>
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
@@ -105,6 +115,40 @@ class Settings extends React.Component {
               <option value="boolean">True / false</option>
             </select>
           </label>
+
+          <table className="box-table">
+            <tr>
+              <th>Category</th>
+              <th>Difficulty</th>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Edit</th>
+            </tr>
+            <tbody>
+              {allSettings.map((each, index) => (
+                <tr id={ index } key={ index }>
+                  <td>
+                    { each.category
+                      ? categories
+                        .find((cats) => cats.id === Number(each.category)).name
+                      : 'Any category'}
+                  </td>
+                  <td>{each.difficulty ? each.difficulty : 'Any Difficulty'}</td>
+                  <td>{each.type ? each.type : 'Any Type'}</td>
+                  <td>{each.amount}</td>
+                  <td>
+                    <button
+                      type="button"
+                      onClick={ () => this.handleDelete(index) }
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
           <button
             type="button"
             onClick={ this.handleClick }
@@ -120,7 +164,8 @@ class Settings extends React.Component {
           </button>
           { redirect && <Redirect to="/" />}
         </div>
-        <table>
+
+        {/* <table>
           <thead>
             <tr>
               <th>Category</th>
@@ -133,7 +178,12 @@ class Settings extends React.Component {
           <tbody>
             {allSettings.map((each, index) => (
               <tr id={ index } key={ index }>
-                <td>{ each.category ? categories.find((cats) => cats.id === Number(each.category)).name : 'Any category'}</td>
+                <td>
+                  { each.category
+                    ? categories
+                      .find((cats) => cats.id === Number(each.category)).name
+                    : 'Any category'}
+                </td>
                 <td>{each.difficulty ? each.difficulty : 'Any Difficulty'}</td>
                 <td>{each.type ? each.type : 'Any Type'}</td>
                 <td>{each.amount}</td>
@@ -148,7 +198,8 @@ class Settings extends React.Component {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
+
       </main>
     );
   }
