@@ -49,7 +49,7 @@
   margin-top: 120px;
   padding: 20px;
   position: relative;
-  width: 500px;
+  width: 400px;
   z-index: 16;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .box-settings label {
-  width: 400px;
+  width: 350px;
 }
 
 .box-settings input, .box-settings select {
@@ -68,7 +68,7 @@
   margin-top: 5px;
   outline: none;
   padding: 10px;
-  width: 400px;
+  width: 350px;
 }
 
 .box-settings select {
@@ -92,7 +92,7 @@
   height: 50px;
   margin: 10px;
   padding: 10px 5px;
-  width: 400px;
+  width: 350px;
 }
 
 .box-settings button:hover {
@@ -118,12 +118,12 @@
   display: flex;
   flex-direction: column;
   font-weight: 900;
-  justify-content: space-around;
+  justify-content: center;
   margin: 10px;
   margin-top: 120px;
   padding: 15px;
   position: relative;
-  width: 700px;
+  width: 800px;
   z-index: 16;
 }
 
@@ -132,30 +132,38 @@
   border-radius: 5px;
   color: white;
   height: 40px;
-  width: 160px;
+  width: 180px;
+}
+
+.table-body {
+  background: rgba(52, 0, 95, 0.6);
+  color: white;
+}
+
+.table-body:nth-child( 2n ) {
+  background: rgba(52, 0, 95, 0.3);
 }
 
 .table-body td {
-  background: rgba(52, 0, 95, 0.6);
   border-radius: 5px;
-  color: white;
   font-size: 0.65rem;
   font-weight: 500;
   height: 40px;
   text-align: center;
-  width: 160px;
+  width: 180px;
 }
 
 .btn-tab-del {
-  background: rgb(70 54 103);
+  background: rgb(168, 2, 2);
   border: none;
   border-radius: 5px;
   color: rgb(209, 202, 230);
   font-size: 0.65rem;
+  padding: 5px 20px;
 }
 
 .btn-tab-del:hover {
-  background: rgb(52, 0, 95);
+  background: rgb(97, 0, 0);
   box-shadow: 0 0 5px rgba(255, 255, 255, 0.55);
   font-weight: 900;
 }
@@ -163,4 +171,3 @@
 .btn-tab-del:active {
   filter: brightness(0.5);
 }
-
