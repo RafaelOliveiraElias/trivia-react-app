@@ -7,12 +7,15 @@ import {
 } from '../redux/actions';
 import '../css/Play.css';
 import WhoWant from '../images/who-want-to-be-a-millionaire.png';
+import music from '../components/music.mp3';
 
 const he = require('he');
 
 const correctAnswer = 'correct-answer';
 
 class Play extends React.Component {
+  audio = new Audio(music)
+
   constructor() {
     super();
     this.state = {
@@ -20,23 +23,29 @@ class Play extends React.Component {
       questioNumber: 0,
       timeIsOver: false,
       sortedArr: [],
+      play: true,
     };
   }
 
   async componentDidMount() {
     this.arraySort(0);
-    const { dispatchQuestion, token, getToken, settings } = this.props;
-    await dispatchQuestion(token, settings.amount, settings.link);
+    this.audio.play();
+    const { dispatchQuestion, token, getToken, matrix } = this.props;
+    await dispatchQuestion(matrix, token);
     const number = 3;
     const { question } = this.props;
     if (question.response_code === number) {
       await getToken();
-      await dispatchQuestion(token, settings.amount);
+      await dispatchQuestion(matrix, token);
     }
     this.arraySort(0);
     this.setState({
       difficulty: question.results[0].difficulty,
     });
+  }
+
+  componentWillUnmount() {
+    this.audio.removeEventListener('ended', () => this.setState({ play: false }));
   }
 
   timeOverFunc = () => {
@@ -92,13 +101,20 @@ class Play extends React.Component {
     this.setState({ sortedArr: this.shuffleArray(result) });
   }
 
+  togglePlay = () => {
+    this.setState({ play: !this.state.play }, () => {
+      this.state.play ? this.audio.play() : this.audio.pause();
+    });
+  }
+
   handleNext = () => {
-    const { dispatchNext, question, history, settings } = this.props;
+    const { dispatchNext, question, history } = this.props;
     const { questioNumber } = this.state;
-    if (questioNumber === settings.amount - 1) {
+    if (questioNumber === question.results.length - 1) {
+      this.audio.pause();
       history.push('/feedback');
     }
-    if (questioNumber !== settings.amount - 1) {
+    if (questioNumber !== question.results.length - 1) {
       this.arraySort(questioNumber + 1);
     }
     this.setState((prevState) => ({
@@ -123,6 +139,13 @@ class Play extends React.Component {
             <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${gravatarEmail}` } alt="headerprofile" />
             <h2 data-testid="header-player-name">{ `Player: ${name}` }</h2>
             <h2 data-testid="header-score">{ `Score: ${score}` }</h2>
+            <button
+              type="button"
+              onClick={ this.togglePlay }
+            >
+              {this.state.play ? 'Pause' : 'Play'}
+
+            </button>
           </div>
         </header>
         <section className="box-timer">
@@ -152,6 +175,19 @@ class Play extends React.Component {
                 he.decode(question.results[questioNumber].question)
               }
             </p>
+            {
+              clicked || timeIsOver
+                ? (
+                  <button
+                    data-testid="btn-next"
+                    type="button"
+                    className="btn-next"
+                    onClick={ this.handleNext }
+                  >
+                    Next
+                  </button>)
+                : null
+            }
           </div>
           <div data-testid="answer-options" className="box-answers">
             {
@@ -176,19 +212,6 @@ class Play extends React.Component {
                 </button>
               ))
             }
-            {
-              clicked || timeIsOver
-                ? (
-                  <button
-                    data-testid="btn-next"
-                    type="button"
-                    className="btn-next"
-                    onClick={ this.handleNext }
-                  >
-                    Next
-                  </button>)
-                : null
-            }
           </div>
         </main>
       </div>
@@ -198,7 +221,7 @@ class Play extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
   login: (e) => dispatch(saveLogin(e)),
-  dispatchQuestion: (token, amount, plus) => dispatch(fetchQuestion(token, amount, plus)),
+  dispatchQuestion: (matrix, token) => dispatch(fetchQuestion(matrix, token)),
   getToken: () => dispatch(fetchToken()),
   answered: () => dispatch(requestAnswered()),
   dispatchNext: () => dispatch(requestNextQuestion()),
@@ -212,6 +235,7 @@ const mapStateToProps = (state) => ({
   isFetchingQuestion: state.isFetchingQuestion,
   time: state.answer.time,
   settings: state.settings,
+  matrix: state.matrix,
 });
 
 Play.propTypes = ({

@@ -38,6 +38,10 @@ const INITIAL_STATE = {
     amount: 5,
     link: '',
   },
+  matrix: [{
+    amount: 5,
+    link: '',
+  }],
 };
 
 function token(state = INITIAL_STATE, action) {
@@ -58,7 +62,12 @@ function token(state = INITIAL_STATE, action) {
   case RECEIVE_TOKEN_SUCCESS:
     return { ...state, isFetching: false, token: action.token };
   case RECEIVE_QUESTION_SUCCESS:
-    return { ...state, isFetchingQuestion: false, question: action.question };
+    const end = action.question.reduce((acc, each) => {
+      return [...each.results, ...acc];
+    }, []);
+    return { ...state,
+      isFetchingQuestion: false,
+      question: { results: end } };
   case HANDLETIME:
     return { ...state, answer: { time: action.time, click: false },
     };
@@ -76,7 +85,7 @@ function token(state = INITIAL_STATE, action) {
   case RECEIVE_CATS_SUCCESS:
     return { ...state, categories: action.cats.trivia_categories };
   case REQUEST_SETTINGS:
-    return { ...state, settings: action.values };
+    return { ...state, matrix: action.values };
   default:
     return state;
   }

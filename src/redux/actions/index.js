@@ -1,5 +1,5 @@
 import getCategories from '../../fetchCategories';
-import getQuestion from '../../fetchQuestion';
+import fetchAllQuestions from '../../fetchQuestion';
 import getToken from '../../fetchToken';
 
 export const REQUEST_TOKEN = 'REQUEST_TOKEN';
@@ -107,14 +107,10 @@ export const receiveQuestionFailure = (error) => ({
   error,
 });
 
-export function fetchQuestion(token, amount, plus) {
+export function fetchQuestion(matrix, token) {
   return async (dispatch) => {
-    dispatch(requestQuestion());
-    try {
-      const data = await getQuestion(token, amount, plus);
-      dispatch(receiveQuestionSuccess(data));
-    } catch (error) {
-      dispatch(receiveQuestionFailure(error));
-    }
+    const data = await fetchAllQuestions(matrix, token);
+    console.log(data);
+    dispatch(receiveQuestionSuccess(data));
   };
 }
