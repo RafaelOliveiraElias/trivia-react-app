@@ -168,6 +168,16 @@
   font-weight: 900;
 }
 
+
+.btn-tab-del:disabled {
+  background: rgb(101, 101, 101);
+  border: none;
+  border-radius: 5px;
+  color: rgb(209, 202, 230);
+  font-size: 0.65rem;
+  padding: 5px 20px;
+}
+
 .btn-tab-del:active {
   filter: brightness(0.5);
 }

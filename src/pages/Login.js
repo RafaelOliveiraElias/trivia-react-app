@@ -67,7 +67,7 @@ class Login extends React.Component {
         <div className="box-access">
           <div className="box-login">
             <label htmlFor="name" className="lbl-login">
-              Nome
+              Nome:
               <input
                 id="name"
                 data-testid="input-player-name"

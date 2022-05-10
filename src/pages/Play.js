@@ -8,6 +8,7 @@ import {
 import '../css/Play.css';
 import WhoWant from '../images/who-want-to-be-a-millionaire.png';
 import music from '../components/music.mp3';
+import { BiPlay, BiPause } from 'react-icons/bi';
 
 const he = require('he');
 
@@ -131,7 +132,7 @@ class Play extends React.Component {
   render() {
     const { player, question, time } = this.props;
     const { gravatarEmail, name, score } = player;
-    const { clicked, questioNumber, timeIsOver, sortedArr } = this.state;
+    const { clicked, questioNumber, timeIsOver, sortedArr, play } = this.state;
     return (
       <div className="box-play">
         <header>
@@ -144,7 +145,7 @@ class Play extends React.Component {
               type="button"
               onClick={ this.togglePlay }
             >
-              { this.play ? 'Pause' : 'Play' }
+              { play ? <div><BiPause size="20px" /><span>Pause</span></div> : <div><BiPlay size="20px" /><span>Play</span></div> }
             </button>
           </div>
         </header>

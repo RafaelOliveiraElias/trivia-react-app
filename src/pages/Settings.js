@@ -15,7 +15,10 @@ class Settings extends React.Component {
       type: '',
       amount: 5,
       redirect: false,
-      allSettings: [],
+      allSettings: [{ category: '',
+        difficulty: '',
+        type: '',
+        amount: 5 }],
     };
   }
 
@@ -137,7 +140,7 @@ class Settings extends React.Component {
               <th>Difficulty</th>
               <th>Type</th>
               <th>Amount</th>
-              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -156,6 +159,7 @@ class Settings extends React.Component {
                   <button
                     className="btn-tab-del"
                     type="button"
+                    disabled={ allSettings.length === 1 }
                     onClick={ () => this.handleDelete(index) }
                   >
                     Delete

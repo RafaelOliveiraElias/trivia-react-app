@@ -41,6 +41,9 @@ const INITIAL_STATE = {
   matrix: [{
     amount: 5,
     link: '',
+    category: '',
+    difficulty: '',
+    type: '',
   }],
 };
 
@@ -63,7 +66,7 @@ function token(state = INITIAL_STATE, action) {
     return { ...state, isFetching: false, token: action.token };
   case RECEIVE_QUESTION_SUCCESS:
     const end = action.question.reduce((acc, each) => {
-      return [...each.results, ...acc];
+      return [...acc, ...each.results];
     }, []);
     return { ...state,
       isFetchingQuestion: false,
